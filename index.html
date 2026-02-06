@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire de saisie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        
+        form {
+            background: white;
+            width: 400px;
+            padding: 20px;
+            margin: 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        select,
+        input {
+            width: 100%;
+            padding: 6px;
+            margin-top: 5px;
+        }
+        
+        table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        
+        table input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background: #2a7cff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form>
+
+        <label>Année</label>
+        <select required>
+    <option value="" disabled selected>-- Choisir une année --</option>
+    <option value="2025">2025</option>
+    <option value="2026">2026</option>
+    <option value="2027">2027</option>
+</select>
+
+        <label>Mois</label>
+        <select required>
+    <option value="" disabled selected>-- Choisir un mois --</option>
+    <option value="Janvier">Janvier</option>
+    <option value="Février">Février</option>
+    <option value="Mars">Mars</option>
+</select>
+        <label>Village</label>
+        <input type="text" placeholder="Entrer le nom du village">
+
+        <label>Nombre de participants</label>
+
+        <table>
+            <tr>
+                <th>Masculin</th>
+                <th>Féminin</th>
+            </tr>
+            <tr>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+            </tr>
+        </table>
+
+        <button type="submit">Enregistrer</button>
+
+    </form>
+
+</body>
+
+</html>
