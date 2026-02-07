@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Formulaire de saisie</title>
+    <title>Formulaire Participants</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             background: #f4f4f4;
         }
         
@@ -30,6 +30,7 @@
             width: 100%;
             padding: 6px;
             margin-top: 5px;
+            box-sizing: border-box;
         }
         
         table {
@@ -38,15 +39,15 @@
             border-collapse: collapse;
         }
         
-        table input {
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
         th,
         td {
             border: 1px solid #999;
             padding: 8px;
+            text-align: center;
+        }
+        
+        table input {
+            width: 100%;
             text-align: center;
         }
         
@@ -64,42 +65,67 @@
 
 <body>
 
-    <form>
+    <form onsubmit="envoyerFormulaire(event)">
 
         <label>Année</label>
-        <select required>
-    <option value="" disabled selected>-- Choisir une année --</option>
-    <option value="2025">2025</option>
-    <option value="2026">2026</option>
-    <option value="2027">2027</option>
+        <select id="annee" required>
+  <option value="" disabled selected>-- Choisir une année --</option>
+  <option>2025</option>
+  <option>2026</option>
+  <option>2027</option>
 </select>
 
         <label>Mois</label>
-        <select required>
-    <option value="" disabled selected>-- Choisir un mois --</option>
-    <option value="Janvier">Janvier</option>
-    <option value="Février">Février</option>
-    <option value="Mars">Mars</option>
+        <select id="mois" required>
+  <option value="" disabled selected>-- Choisir un mois --</option>
+  <option>Janvier</option>
+  <option>Février</option>
+  <option>Mars</option>
 </select>
+
         <label>Village</label>
-        <input type="text" placeholder="Entrer le nom du village">
+        <input type="text" id="village" placeholder="Entrer le nom du village" required>
 
         <label>Nombre de participants</label>
-
         <table>
             <tr>
                 <th>Masculin</th>
                 <th>Féminin</th>
             </tr>
             <tr>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
+                <td><input type="number" id="masculin" min="0" required></td>
+                <td><input type="number" id="feminin" min="0" required></td>
             </tr>
         </table>
 
         <button type="submit">Enregistrer</button>
 
     </form>
+
+    <script>
+        function envoyerFormulaire(event) {
+            event.preventDefault(); // empêche l'envoi classique
+
+            const data = {
+                annee: document.getElementById("annee").value,
+                mois: document.getElementById("mois").value,
+                village: document.getElementById("village").value,
+                masculin: document.getElementById("masculin").value,
+                feminin: document.getElementById("feminin").value
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbxxkp-BzxCdt-cvt1M8DMuDiYFldPz1juDHP-1TwRC-NhYwJdt-ksSLqK1FHTvS5zHlBw/exec", { // <-- Remplace par ton lien Web App
+                    method: "POST",
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(resp => {
+                    alert("Données enregistrées !");
+                    document.querySelector("form").reset(); // vide le formulaire
+                })
+                .catch(error => alert("Erreur : " + error));
+        }
+    </script>
 
 </body>
 
